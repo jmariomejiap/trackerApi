@@ -1,0 +1,39 @@
+{
+  "name": "trackerApi",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "dev": "ts-node ./app/index.ts",
+    "prod": "tsc && node ./dist/index.js",
+    "test": "NODE_ENV=test jest --collectCoverage --verbose",
+    "clean": "rm -rf node_modules"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/dotenv": "^6.1.0",
+    "@types/express": "^4.16.1",
+    "@types/lodash": "^4.14.123",
+    "@types/mongoose": "^5.3.23",
+    "@types/supertest": "^2.0.7",
+    "@types/validator": "^10.11.0",
+    "body-parser": "^1.18.3",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
+    "lodash": "^4.17.11",
+    "mongoose": "^5.4.19",
+    "nodemon": "^1.18.10",
+    "ts-node": "^8.0.3",
+    "typescript": "^3.3.3333",
+    "validator": "^10.11.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "jest": "^24.5.0",
+    "supertest": "^4.0.2",
+    "ts-jest": "^24.0.0"
+  }
+}
