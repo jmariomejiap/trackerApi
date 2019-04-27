@@ -1,12 +1,11 @@
 import * as mongoose from "mongoose";
-import validator from "validator";
 
-const userSchema = new mongoose.Schema({
+const expensesSchema = new mongoose.Schema({
   userId: {
     type: String,
     required: true
   },
-  caterogy: {
+  category: {
     type: String,
     required: true
   },
@@ -17,4 +16,4 @@ const userSchema = new mongoose.Schema({
   dateCreated: { type: Date, default: Date.now }
 });
 
-export default mongoose.model("Users", userSchema);
+export default mongoose.model("Expenses", expensesSchema);

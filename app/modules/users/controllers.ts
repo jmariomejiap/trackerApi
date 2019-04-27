@@ -23,7 +23,7 @@ const findUsers = async (req: Request, res: Response) => {
     query = { ...req.query };
   }
 
-  let usersFound;
+  let usersFound: Array<T.User>;
 
   try {
     usersFound = await Users.find(query);
@@ -41,11 +41,23 @@ const findUsers = async (req: Request, res: Response) => {
       .json({ result: "error", message: "invalid user", details: "" });
   }
 
+  console.log("users found === ", usersFound);
+
+  const sortUsers = usersFound.sort((a: T.User, b: T.User) => {
+    if (a.lastName < b.lastName) {
+      return -1;
+    }
+    if (a.lastName > b.lastName) {
+      return 1;
+    }
+    return 0;
+  });
+
   return res.status(200).json({ result: "ok", users: usersFound, details: "" });
 };
 
 const createUser = async (req: Request, res: Response) => {
-  const newUser: T.NewUser = req.body;
+  const newUser: T.User = req.body;
 
   try {
     const usersSaved = await Users.create(newUser);

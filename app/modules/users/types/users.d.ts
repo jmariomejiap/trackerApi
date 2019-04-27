@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 export namespace UserTypes {
   export interface DeleteResponse {
     n?: number;
@@ -5,7 +7,7 @@ export namespace UserTypes {
     deletedCount?: number;
   }
 
-  export interface NewUser {
+  export interface User extends mongoose.Document {
     name: String;
     lastName: String;
     email: String;

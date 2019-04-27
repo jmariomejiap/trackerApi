@@ -1,11 +1,9 @@
 import { Router, Request, Response } from "express";
-// import * as Controller from './controllers';
+import * as Controller from "./controllers";
 
 const router = Router();
 
-router.get("/", (req: Request, res: Response) =>
-  res.status(200).json({ result: "ok", message: "expenses is on" })
-);
+router.get("/", Controller.validateUser, Controller.findExpenses);
 
 router.post("/", (req: Request, res: Response) =>
   res.status(200).json({ result: "ok", message: "expenses is on" })

@@ -1,5 +1,6 @@
 import * as mongoose from "mongoose";
 import validator from "validator";
+import { UserTypes as T } from "../modules/users/types/users";
 
 const userSchema = new mongoose.Schema({
   name: String,
@@ -22,4 +23,4 @@ const userSchema = new mongoose.Schema({
   dateCreated: { type: Date, default: Date.now }
 });
 
-export default mongoose.model("Users", userSchema);
+export default mongoose.model<T.User>("Users", userSchema);
