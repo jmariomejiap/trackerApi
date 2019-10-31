@@ -7,6 +7,17 @@ export namespace UserTypes {
     deletedCount?: number;
   }
 
+  export interface ErrorResponse {
+    result: String;
+    message: String;
+    details: String;
+  }
+
+  export interface CreateUserResponse {
+    result: String;
+    data: String;
+  }
+
   export interface User extends mongoose.Document {
     name: String;
     lastName: String;

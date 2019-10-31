@@ -30,7 +30,7 @@ const findExpenses = async (req: Request, res: Response) => {
 
   try {
     expensesFound = await Expenses.find({ userId: req.cookies.id });
-    console.log("expenseFound ", expensesFound);
+    // console.log("expenseFound ", expensesFound);
   } catch (error) {
     return res.status(500).json({
       result: "error",
@@ -50,4 +50,9 @@ const findExpenses = async (req: Request, res: Response) => {
     .json({ result: "ok", data: expensesFound, message: "" });
 };
 
-export { findExpenses, validateUser };
+const addExpense = async (req: Request, res: Response) => {
+  // console.log(req.body);
+  return res.status(200).json({ result: "ok", data: req.body, message: "" });
+};
+
+export { addExpense, findExpenses, validateUser };
