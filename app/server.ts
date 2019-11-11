@@ -19,8 +19,8 @@ const { NODE_ENV, MONGODB_URI, MONGODB_URI_LOCAL } = process.env;
 // console.log("server NODE ENV", NODE_ENV);
 
 if (String(NODE_ENV) === "development") {
-  console.log("going to connect mongoose");
   mongoose.connect(String(MONGODB_URI_LOCAL), { useNewUrlParser: true });
+  mongoose.set("useCreateIndex", true);
   var db = mongoose.connection;
   db.on("error", console.error.bind(console, "connection error:"));
   db.once("open", function() {

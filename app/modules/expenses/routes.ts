@@ -1,20 +1,18 @@
 import { Router, Request, Response } from "express";
 import * as Controller from "./controllers";
+import tokenValidation from "../../middleware/auth";
 
 const router = Router();
 
-router.get("/", Controller.validateUser, Controller.findExpenses);
+router.get("/", tokenValidation, Controller.findExpenses);
 
 router.post(
   "/",
-  Controller.validateUser,
+  tokenValidation,
+  Controller.validatePayload,
   Controller.addExpense
-  // (req: Request, res: Response) =>
-  // res.status(200).json({ result: "ok", message: "expenses is on" })
 );
 
-router.delete("/", (req: Request, res: Response) =>
-  res.status(200).json({ result: "ok", message: "expenses is on" })
-);
+router.delete("/", tokenValidation, Controller.removeExpense);
 
 export default router;

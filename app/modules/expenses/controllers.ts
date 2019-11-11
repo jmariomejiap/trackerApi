@@ -1,58 +1,90 @@
 import { Request, Response, NextFunction } from "express";
 import Expenses from "../../models/expenses";
+import { ExpensesTypes as T } from "./types/expenses";
+import { errorResponse } from "../../utils/errorResponse";
 
-const validateUser = async (
+const validatePayload = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  // console.log("valdiateUser cookie", req.cookies);
-  const id: String = req.cookies.id;
+  const { category, amount } = req.body;
 
-  if (!id) {
-    return res
-      .status(401)
-      .json({ result: "error", message: "unauthorized user", details: "" });
+  if (!category || !amount) {
+    return errorResponse(res, 400, "incomplete information", "");
   }
 
   return next();
 };
 
 const findExpenses = async (req: Request, res: Response) => {
-  let query = {};
-
-  // const { name, lastName, email, phoneNumber } = req.query;
-  // if (name || lastName || email || phoneNumber) {
-  //   query = { ...req.query };
-  // }
-
-  let expensesFound;
+  const userData = res.locals.userData;
 
   try {
-    expensesFound = await Expenses.find({ userId: req.cookies.id });
-    // console.log("expenseFound ", expensesFound);
-  } catch (error) {
-    return res.status(500).json({
-      result: "error",
-      message: "internal error",
-      details: error.name
+    const expensesFound: Array<T.Expenses> | Array<any> = await Expenses.find({
+      userId: userData.userId
     });
+
+    if (expensesFound.length === 0) {
+      return res
+        .status(204)
+        .json({ result: "ok", data: "", message: "no expenses found" });
+    }
+
+    const data = expensesFound.map(expense => {
+      const { category, amount, dateCreated } = expense;
+      return { category, amount, date: dateCreated };
+    });
+
+    return res.status(200).json({ result: "ok", data, message: "" });
+  } catch (error) {
+    return errorResponse(res, 500, "internal error", error.name);
   }
-
-  // if (usersFound.length === 0) {
-  //   return res
-  //     .status(400)
-  //     .json({ result: "error", message: "invalid user", details: "" });
-  // }
-
-  return res
-    .status(200)
-    .json({ result: "ok", data: expensesFound, message: "" });
 };
 
 const addExpense = async (req: Request, res: Response) => {
-  // console.log(req.body);
-  return res.status(200).json({ result: "ok", data: req.body, message: "" });
+  const userData = res.locals.userData;
+  const { category, amount } = req.body;
+
+  try {
+    const result: T.Expenses | any = await Expenses.create({
+      userId: userData.userId,
+      category,
+      amount
+    });
+
+    if (!result) {
+      return errorResponse(res, 500, "internal error", "");
+    }
+
+    delete result.userId;
+
+    return res.status(200).json({ result: "ok", data: result, message: "" });
+  } catch (error) {
+    return errorResponse(res, 500, "internal error", error.name);
+  }
 };
 
-export { addExpense, findExpenses, validateUser };
+const removeExpense = async (req: Request, res: Response) => {
+  const userData = res.locals.userData;
+  const { _id } = req.body;
+
+  try {
+    const result: T.Expenses | any = await Expenses.deleteOne({
+      _id,
+      userId: userData.userId
+    });
+
+    if (result.deletedCount === 0) {
+      return errorResponse(res, 400, "internal error", "expense not found");
+    }
+
+    return res
+      .status(200)
+      .json({ result: "ok", data: "", message: "item deleted" });
+  } catch (error) {
+    return errorResponse(res, 500, "internal error", error.name);
+  }
+};
+
+export { validatePayload, addExpense, findExpenses, removeExpense };

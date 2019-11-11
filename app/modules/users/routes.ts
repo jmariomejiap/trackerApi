@@ -1,12 +1,22 @@
-import { Router, Request, Response } from "express";
+import { Router } from "express";
 import * as Controller from "./controllers";
+import tokenValidation from "../../middleware/auth";
 
 const router = Router();
 
-router.get("/", Controller.tokenValidation, Controller.findUser);
+router.post("/login", Controller.verifyUserLogin, Controller.findUser);
 
-router.post("/", Controller.verifyUserPayload, Controller.createUser);
+router.post(
+  "/create",
+  Controller.verifyUserCreatePayload,
+  Controller.createUser
+);
 
-router.delete("/", Controller.tokenValidation, Controller.deleteUser);
+router.delete(
+  "/remove",
+  Controller.verifyUserLogin,
+  tokenValidation,
+  Controller.deleteUser
+);
 
 export default router;
