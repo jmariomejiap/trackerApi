@@ -64,7 +64,7 @@ const findUser = async (req: Request, res: Response) => {
 
   return res
     .status(200)
-    .append("x-tracker-token", token)
+    .append("binnacle-token", token)
     .json({ result: "ok", data, token });
 };
 
@@ -86,9 +86,10 @@ const createUser = async (req: Request, res: Response) => {
 
     return res
       .status(201)
-      .append("x-tracker-token", token)
+      .append("binnacle-token", token)
       .json({ result: "ok", data, token });
   } catch (error) {
+    console.log("error createing user ", error);
     return errorResponse(res, 500, "internal error", error.name);
   }
 };

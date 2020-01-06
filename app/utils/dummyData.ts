@@ -14,6 +14,7 @@ export default function() {
     const firstUser = await Users.create({
       name: "Mario",
       lastName: "Mejia",
+      password: '12345',
       email: "jmariomejiap@gmail.com",
       phoneNumber: "782-414-2893"
     });

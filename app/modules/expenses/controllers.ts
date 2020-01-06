@@ -32,8 +32,9 @@ const findExpenses = async (req: Request, res: Response) => {
     }
 
     const data = expensesFound.map(expense => {
-      const { category, amount, dateCreated } = expense;
-      return { category, amount, date: dateCreated };
+      const { _id, category, amount, dateCreated } = expense;
+
+      return { _id, category, amount, date: dateCreated };
     });
 
     return res.status(200).json({ result: "ok", data, message: "" });

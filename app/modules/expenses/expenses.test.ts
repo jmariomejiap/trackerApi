@@ -74,7 +74,7 @@ describe("expenses resource", () => {
     const res = await request(server)
       .get("/api/v1/expenses")
       .query({})
-      .set("x-tracker-token", internalHelper.token);
+      .set("binnacle-token", internalHelper.token);
 
     const { data, message, result } = res.body;
 
@@ -94,7 +94,7 @@ describe("expenses resource", () => {
         category: "gas",
         amount: 64
       })
-      .set("x-tracker-token", internalHelper.token);
+      .set("binnacle-token", internalHelper.token);
 
     const { data, message, result } = res.body;
 
@@ -114,7 +114,7 @@ describe("expenses resource", () => {
       .send({
         _id: internalHelper.expenses[0]._id
       })
-      .set("x-tracker-token", internalHelper.obsoleteToken);
+      .set("binnacle-token", internalHelper.obsoleteToken);
 
     const { details, message, result } = res.body;
 
@@ -130,7 +130,7 @@ describe("expenses resource", () => {
       .send({
         _id: internalHelper.expenses[0]._id
       })
-      .set("x-tracker-token", internalHelper.token);
+      .set("binnacle-token", internalHelper.token);
 
     const { data, message, result } = res.body;
 

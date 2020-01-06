@@ -4,7 +4,7 @@ import { verifyToken } from "../utils/tokenHelper";
 
 const tokenValidation = (req: Request, res: Response, next: NextFunction) => {
   let token: any =
-    req.headers["x-tracker-token"] || req.headers["authorization"];
+    req.headers["binnacle-token"] || req.headers["authorization"];
 
   if (!token) {
     return errorResponse(res, 400, "incomplete user information", "");

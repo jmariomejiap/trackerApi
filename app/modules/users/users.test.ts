@@ -87,7 +87,7 @@ describe("users resource", () => {
     expect(req.status).to.equal(200);
     expect(req.body.result).to.equal("ok");
     expect(req.body.token).to.not.have.lengthOf(0);
-    expect(req.header["x-tracker-token"]).to.not.have.lengthOf(0);
+    expect(req.header["binnacle-token"]).to.not.have.lengthOf(0);
 
     expect(req.body.data.name).to.equal("Mario");
     expect(req.body.data.lastName).to.equal("Mejia");
@@ -187,7 +187,7 @@ describe("users resource", () => {
         email: "gabrielito@gmail.com",
         password: "silly"
       })
-      .set("x-tracker-token", internalHelper.obsoleteToken);
+      .set("binnacle-token", internalHelper.obsoleteToken);
 
     expect(req.status).to.equal(400);
     expect(req.body.result).to.equal("error");
@@ -202,10 +202,10 @@ describe("users resource", () => {
         password: "silly",
         token: internalHelper.token
       })
-      .set("x-tracker-token", internalHelper.token);
+      .set("binnacle-token", internalHelper.token);
 
     expect(req.status).to.equal(201);
-    expect(req.header).to.not.have.property("x-tracker-token");
+    expect(req.header).to.not.have.property("binnacle-token");
     expect(req.body.result).to.equal("ok");
     expect(req.body.userId).to.equal("");
     expect(req.body.details).to.equal("user deleted");
