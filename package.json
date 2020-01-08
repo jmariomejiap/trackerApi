@@ -6,7 +6,7 @@
   "scripts": {
     "tsc": "tsc",
     "dev": "ts-node ./app/index.ts",
-    "prod": "tsc && node ./dist/index.js",
+    "prod": "NODE_ENV=production tsc && node ./dist/index.js",
     "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha --recursive 'app/**/*.test.ts' --require ts-node/register",
     "clean": "rm -rf node_modules",
     "clean-install": "npm run clean && npm install"
