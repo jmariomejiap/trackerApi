@@ -11,12 +11,11 @@ services:
   - docker
 
 script:
-  # - docker build -t tracker-api .
-  # - docker images tracker-api
+  - docker build -t tracker-api .
+  - docker images tracker-api
 
-  - docker-compose build
-  - docker-compose up -d mongo
-
+  - docker run -d -p 27017-27019:27017-27019 --name mongodb  mongo
   - ls -la
 
+  - npm install
   - npm run test

@@ -4,7 +4,21 @@ services:
   api:
     container_name: api
     restart: always
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+
+    depends_on:
+      - mongo
+
+  api-test:
+    container_name: api-test
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile-test
     ports:
       - "8080:8080"
 
