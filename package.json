@@ -7,7 +7,7 @@
     "tsc": "tsc",
     "dev": "ts-node ./app/index.ts",
     "prod": "NODE_ENV=production tsc && node ./dist/index.js",
-    "test": "NODE_ENV=test MONGODB_URI_LOCAL=mongodb://mongo:27017/tracker-api-test nyc --reporter=html --reporter=text mocha --recursive 'app/**/*.test.ts' --require ts-node/register",
+    "test": "NODE_ENV=test nyc --reporter=html --reporter=text mocha --recursive 'app/**/*.test.ts' --require ts-node/register",
     "clean": "rm -rf node_modules",
     "clean-install": "npm run clean && npm install"
   },
@@ -60,7 +60,6 @@
     ],
     "reporter": [
       "html"
-    ],
-    "all": true
+    ]
   }
 }

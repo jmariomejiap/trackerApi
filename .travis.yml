@@ -14,7 +14,7 @@ script:
   - docker build -t tracker-api .
   - docker images tracker-api
 
-  - docker run -d -p 27017-27019:27017-27019 --name mongodb  mongo
+  - docker run -d -p 27017-27017:27017-27017 --name mongodb  mongo
   - ls -la
 
   - npm install
