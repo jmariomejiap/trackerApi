@@ -11,5 +11,5 @@ services:
   - docker
 
 script:
-  - docker build -t trackerApi .
-  - docker images trackerApi
+  - docker build -t tracker-api .
+  - docker images tracker-api
