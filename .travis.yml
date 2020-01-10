@@ -13,3 +13,5 @@ services:
 script:
   - docker build -t tracker-api .
   - docker images tracker-api
+
+  - ls -la
