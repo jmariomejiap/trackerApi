@@ -1,6 +1,15 @@
-language: node_js
+# language: node_js
 
-install:
-  - npm install
-script:
-  - npm run test
+# install:
+#   - npm install
+# script:
+#   - npm run test
+
+sudo: required
+
+services:
+  - docker
+
+scripts:
+  - docker build -t trackerApi .
+  - docker images trackerApi
