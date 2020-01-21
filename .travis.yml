@@ -10,12 +10,32 @@ sudo: required
 services:
   - docker
 
-script:
-  - docker build -t tracker-api .
-  - docker images tracker-api
+env:
+  DOCKER_COMPOSE_VERSION: 1.12.2
 
-  - docker run -d -p 27017-27017:27017-27017 --name mongodb  mongo
-  - ls -la
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L http://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+before_script:
+  # - docker-compose
+  # - docker-compose run mongo
+  # - docker-compose run api-test
+  - docker-compose up -d mongo
+
+script:
+  # - docker build -t tracker-api .
+  # - docker images tracker-api
+
+  # - docker run -d -p 27017-27017:27017-27017 --name mongodb  mongo
+  # - ls -la
 
   - npm install
   - npm run test
+  - ls -la
+  - pwd
+
+after_script:
+  - docker-compose down
