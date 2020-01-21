@@ -1,41 +1,42 @@
-# language: node_js
+language: node_js
 
-# install:
-#   - npm install
-# script:
-#   - npm run test
+services: mongodb
 
-sudo: required
-
-services:
-  - docker
-
-env:
-  DOCKER_COMPOSE_VERSION: 1.12.2
-
-before_install:
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L http://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-
-before_script:
-  - docker-compose
-  # - docker-compose run mongo
-  # - docker-compose run api-test
-  - docker-compose up -d mongo
-
-script:
-  # - docker build -t tracker-api .
-  # - docker images tracker-api
-
-  # - docker run -d -p 27017-27017:27017-27017 --name mongodb  mongo
-  # - ls -la
-
+install:
   - npm install
+script:
   - npm run test
-  - ls -la
-  - pwd
+# sudo: required
 
-after_script:
-  - docker-compose down
+# services:
+#   - docker
+
+# env:
+#   DOCKER_COMPOSE_VERSION: 1.4.2
+
+# before_install:
+#   - sudo rm /usr/local/bin/docker-compose
+#   - curl -L http://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+#   - chmod +x docker-compose
+#   - sudo mv docker-compose /usr/local/bin
+
+# before_script:
+#   - docker-compose
+#   # - docker-compose run mongo
+#   # - docker-compose run api-test
+#   - docker-compose up -d mongo
+
+# script:
+#   # - docker build -t tracker-api .
+#   # - docker images tracker-api
+
+#   # - docker run -d -p 27017-27017:27017-27017 --name mongodb  mongo
+#   # - ls -la
+
+#   - npm install
+#   - npm run test
+#   - ls -la
+#   - pwd
+
+# after_script:
+#   - docker-compose down

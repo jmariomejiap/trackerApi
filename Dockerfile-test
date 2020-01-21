@@ -16,4 +16,4 @@ COPY . /usr/src/app
 
 EXPOSE 8080
 
-RUN npm run test
+CMD npm run test
