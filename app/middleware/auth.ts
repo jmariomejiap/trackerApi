@@ -7,14 +7,14 @@ const tokenValidation = (req: Request, res: Response, next: NextFunction) => {
     req.headers["binnacle-token"] || req.headers["authorization"];
 
   if (!token) {
-    return errorResponse(res, 400, "incomplete user information", "");
+    return errorResponse(res, 400, "incomplete user information NO token", "");
   }
 
   try {
     const userData = verifyToken(token);
     res.locals.userData = userData;
   } catch (error) {
-    return errorResponse(res, 400, "incomplete user information", "");
+    return errorResponse(res, 400, "incomplete user information Verifying", "");
   }
 
   return next();
