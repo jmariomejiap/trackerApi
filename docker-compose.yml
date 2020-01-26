@@ -13,18 +13,6 @@ services:
     depends_on:
       - mongo
 
-  api-test:
-    container_name: api-test
-    restart: always
-    build:
-      context: .
-      dockerfile: Dockerfile-test
-    ports:
-      - "8080:8080"
-
-    depends_on:
-      - mongo
-
   mongo:
     container_name: mongo
     image: mongo
