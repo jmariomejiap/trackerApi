@@ -60,7 +60,6 @@
     ],
     "reporter": [
       "html"
-    ],
-    "all": true
+    ]
   }
 }

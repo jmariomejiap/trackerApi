@@ -1,0 +1,7 @@
+node_modules
+dist
+data
+.nyc_output
+coverage
+.git
+npm-debug.log

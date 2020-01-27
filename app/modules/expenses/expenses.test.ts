@@ -104,7 +104,6 @@ describe("expenses resource", () => {
     expect(data.amount).to.equal(64);
     expect(data._id).to.not.have.length(0);
     expect(data.dateCreated).to.not.have.length(0);
-
     expect(message).to.equal("");
   });
 

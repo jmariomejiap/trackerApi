@@ -89,7 +89,6 @@ const createUser = async (req: Request, res: Response) => {
       .append("binnacle-token", token)
       .json({ result: "ok", data, token });
   } catch (error) {
-    console.log("error createing user ", error);
     return errorResponse(res, 500, "internal error", error.name);
   }
 };
