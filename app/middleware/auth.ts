@@ -14,7 +14,7 @@ const tokenValidation = (req: Request, res: Response, next: NextFunction) => {
     const userData = verifyToken(token);
     res.locals.userData = userData;
   } catch (error) {
-    return errorResponse(res, 400, "incomplete user information Verifying", "");
+    return errorResponse(res, 400, "incomplete user information", "");
   }
 
   return next();

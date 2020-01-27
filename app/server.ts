@@ -12,19 +12,10 @@ import dummyData from "./utils/dummyData";
 
 dotenv.config();
 
-const { NODE_ENV, MONGODB_URI, MONGODB_URI_LOCAL } = process.env;
-
-// const mongoDbTarget =
-//   String(NODE_ENV) === "test" ? `${MONGODB_URI_LOCAL}-test` : ;
-
-// console.log("server NODE ENV", NODE_ENV);
+const { NODE_ENV, MONGODB_URI_LOCAL } = process.env;
 
 if (String(NODE_ENV) !== "test") {
   mongoose.connect(String(MONGODB_URI_LOCAL), { useNewUrlParser: true });
-
-  // mongoose.connect("mongodb://mongo:27017/tracker-api", {
-  //   useNewUrlParser: true
-  // });
 
   mongoose.set("useCreateIndex", true);
   var db = mongoose.connection;

@@ -109,11 +109,6 @@ describe("expenses resource", () => {
   });
 
   it("should return an error trying to remove an expense wrong token", async () => {
-    console.log(
-      "internalHelper.expenses[0]._id",
-      internalHelper.expenses[0]._id
-    );
-    console.log("internalHelper.obsoleteToken", internalHelper.obsoleteToken);
     const res = await request(server)
       .delete("/api/v1/expenses")
       .send({
